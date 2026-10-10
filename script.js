@@ -5,6 +5,7 @@
 
 /* CONFIGURE O WHATSAPP DO STUDIO */
 
+
 const STUDIO_CONFIG = {
   whatsapp: "5511982190060",
   mensagem: "Olá! Conheci o Studio Tech Trainner pelo site e gostaria de conhecer os treinamentos, valores e horários disponíveis."
