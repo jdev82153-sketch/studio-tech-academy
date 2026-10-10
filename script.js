@@ -1,88 +1,64 @@
 
-/* ========================================
-   STUDIO TECH TRAINNER
-   Menu responsivo e contato via WhatsApp
-======================================== */
+/* STUDIO TECH TRAINNER */
 
-/* CONFIGURAÇÃO DO WHATSAPP */
-const STUDIO_CONFIG = {
-  whatsapp: "", // Coloque o número com DDI e DDD, somente números.
-  mensagem:
-    "Olá! Conheci o Studio Tech Trainner pelo site e gostaria de saber mais sobre os treinamentos."
-};
-
-/* ELEMENTOS */
 const menuToggle = document.getElementById("menu-toggle");
 const navMenu = document.getElementById("nav-menu");
 const contactButton = document.getElementById("contact-button");
 
-/* ========================================
-   MENU PARA CELULAR
-======================================== */
+const STUDIO_CONFIG = {
+  whatsapp: "", // Coloque o número com código do país e DDD.
+  mensagem:
+    "Olá! Conheci o Studio Tech Trainner pelo site e gostaria de saber mais sobre os treinamentos."
+};
 
-function closeMenu() {
+/* MENU MOBILE */
+function setMenuOpen(open) {
   if (!menuToggle || !navMenu) return;
 
-  navMenu.classList.remove("active");
-  menuToggle.classList.remove("active");
-  menuToggle.setAttribute("aria-expanded", "false");
-  menuToggle.setAttribute("aria-label", "Abrir menu");
-}
-
-function openMenu() {
-  if (!menuToggle || !navMenu) return;
-
-  navMenu.classList.add("active");
-  menuToggle.classList.add("active");
-  menuToggle.setAttribute("aria-expanded", "true");
-  menuToggle.setAttribute("aria-label", "Fechar menu");
+  navMenu.classList.toggle("active", open);
+  menuToggle.classList.toggle("active", open);
+  menuToggle.setAttribute("aria-expanded", String(open));
+  menuToggle.setAttribute(
+    "aria-label",
+    open ? "Fechar menu" : "Abrir menu"
+  );
 }
 
 if (menuToggle && navMenu) {
-  menuToggle.addEventListener("click", () => {
+  menuToggle.addEventListener("click", (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+
     const isOpen = navMenu.classList.contains("active");
-
-    if (isOpen) {
-      closeMenu();
-    } else {
-      openMenu();
-    }
+    setMenuOpen(!isOpen);
   });
 
-  // Fecha o menu ao selecionar uma seção.
   navMenu.querySelectorAll('a[href^="#"]').forEach((link) => {
-    link.addEventListener("click", closeMenu);
+    link.addEventListener("click", () => setMenuOpen(false));
   });
 
-  // Fecha o menu com a tecla Escape.
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") {
-      closeMenu();
-    }
-  });
-
-  // Evita manter o menu mobile aberto ao ampliar a tela.
-  window.addEventListener("resize", () => {
-    if (window.innerWidth > 700) {
-      closeMenu();
-    }
-  });
-
-  // Fecha ao clicar fora do menu.
   document.addEventListener("click", (event) => {
-    const clickedInsideMenu = navMenu.contains(event.target);
-    const clickedToggle = menuToggle.contains(event.target);
-
-    if (!clickedInsideMenu && !clickedToggle) {
-      closeMenu();
+    if (
+      navMenu.classList.contains("active") &&
+      !navMenu.contains(event.target) &&
+      !menuToggle.contains(event.target)
+    ) {
+      setMenuOpen(false);
     }
   });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") setMenuOpen(false);
+  });
+
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 700) setMenuOpen(false);
+  });
+
+  setMenuOpen(false);
 }
 
-/* ========================================
-   BOTÃO DE CONTATO
-======================================== */
-
+/* WHATSAPP */
 if (contactButton) {
   contactButton.addEventListener("click", (event) => {
     event.preventDefault();
@@ -91,31 +67,24 @@ if (contactButton) {
 
     if (!phone) {
       alert(
-        "O WhatsApp do studio ainda não foi configurado. " +
-        "Adicione o número no arquivo script.js."
+        "Configure o WhatsApp no arquivo script.js para ativar o contato."
       );
       return;
     }
 
-    const message = encodeURIComponent(STUDIO_CONFIG.mensagem);
-    const whatsappUrl = `https://wa.me/${phone}?text=${message}`;
+    const url =
+      "https://wa.me/" +
+      phone +
+      "?text=" +
+      encodeURIComponent(STUDIO_CONFIG.mensagem);
 
-    window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+    window.open(url, "_blank", "noopener,noreferrer");
   });
 }
 
-/* ========================================
-   ANO AUTOMÁTICO NO RODAPÉ
-======================================== */
+/* ANO DO RODAPÉ */
+const yearElement = document.getElementById("current-year");
 
-const currentYear = document.getElementById("current-year");
-
-if (currentYear) {
-  currentYear.textContent = new Date().getFullYear();
+if (yearElement) {
+  yearElement.textContent = new Date().getFullYear();
 }
-
-/* ========================================
-   FECHAMENTO INICIAL DO MENU
-======================================== */
-
-closeMenu();
