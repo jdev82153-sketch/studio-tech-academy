@@ -4,11 +4,12 @@
 ===================================== */
 
 /* CONFIGURE O WHATSAPP DO STUDIO */
+
 const STUDIO_CONFIG = {
-  whatsapp: "", // Exemplo: "5511999999999"
-  mensagem:
-    "Olá! Conheci o Studio Tech Trainner pelo site e gostaria de conhecer os treinamentos, valores e horários disponíveis."
+  whatsapp: "5511982190060",
+  mensagem: "Olá! Conheci o Studio Tech Trainner pelo site e gostaria de conhecer os treinamentos, valores e horários disponíveis."
 };
+
 
 /* MENU MOBILE */
 const menuToggle = document.getElementById("menu-toggle");
