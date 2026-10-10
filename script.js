@@ -1,79 +1,125 @@
 
+"use strict";
+
 /* =====================================
    STUDIO TECH TRAINNER
+   Configuração do WhatsApp
 ===================================== */
-
-/* CONFIGURE O WHATSAPP DO STUDIO */
-
 
 const STUDIO_CONFIG = {
   whatsapp: "5511982190060",
-  mensagem: "Olá! Conheci o Studio Tech Trainner pelo site e gostaria de conhecer os treinamentos, valores e horários disponíveis."
+  mensagem:
+    "Olá! Conheci o Studio Tech Trainner pelo site e gostaria de conhecer os treinamentos, valores e horários disponíveis."
 };
 
+/* =====================================
+   FUNÇÕES DO WHATSAPP
+===================================== */
 
-/* MENU MOBILE */
-const menuToggle = document.getElementById("menu-toggle");
-const navMenu = document.getElementById("nav-menu");
+function abrirWhatsApp(event) {
+  if (event) {
+    event.preventDefault();
+  }
 
-function setMenuOpen(open) {
-  if (!menuToggle || !navMenu) return;
+  const numero = String(STUDIO_CONFIG.whatsapp || "")
+    .replace(/\D/g, "");
 
-  navMenu.classList.toggle("active", open);
-  menuToggle.classList.toggle("active", open);
-  menuToggle.setAttribute("aria-expanded", String(open));
-  menuToggle.setAttribute(
-    "aria-label",
-    open ? "Fechar menu" : "Abrir menu"
+  const mensagem = encodeURIComponent(
+    STUDIO_CONFIG.mensagem
   );
+
+  if (!numero) {
+    console.error("Configure o número do WhatsApp em STUDIO_CONFIG.");
+    return;
+  }
+
+  const url = `https://wa.me/${numero}?text=${mensagem}`;
+
+  window.open(url, "_blank", "noopener,noreferrer");
 }
 
-if (menuToggle && navMenu) {
-  menuToggle.addEventListener("click", (event) => {
-    event.stopPropagation();
-    setMenuOpen(!navMenu.classList.contains("active"));
+/* =====================================
+   MENU MOBILE
+===================================== */
+
+function configurarMenu() {
+  const menuBotao = document.getElementById("menu-toggle");
+  const menu = document.getElementById("nav-menu");
+
+  if (!menuBotao || !menu) {
+    return;
+  }
+
+  menuBotao.addEventListener("click", function () {
+    const aberto = menu.classList.toggle("active");
+
+    menuBotao.setAttribute("aria-expanded", String(aberto));
   });
 
-  navMenu.querySelectorAll("a").forEach((link) => {
-    link.addEventListener("click", () => setMenuOpen(false));
+  menu.querySelectorAll("a").forEach(function (link) {
+    link.addEventListener("click", function () {
+      menu.classList.remove("active");
+      menuBotao.setAttribute("aria-expanded", "false");
+    });
   });
 
-  document.addEventListener("click", (event) => {
+  document.addEventListener("click", function (event) {
     if (
-      navMenu.classList.contains("active") &&
-      !navMenu.contains(event.target) &&
-      !menuToggle.contains(event.target)
+      !menu.contains(event.target) &&
+      !menuBotao.contains(event.target)
     ) {
-      setMenuOpen(false);
+      menu.classList.remove("active");
+      menuBotao.setAttribute("aria-expanded", "false");
     }
   });
+}
 
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") setMenuOpen(false);
+/* =====================================
+   BOTÕES DE CONTATO
+===================================== */
+
+function configurarBotoesWhatsApp() {
+  // Todos os links com essa classe abrem o WhatsApp.
+  document.querySelectorAll(".whatsapp-link").forEach(function (botao) {
+    botao.addEventListener("click", abrirWhatsApp);
   });
 
-  window.addEventListener("resize", () => {
-    if (window.innerWidth > 700) setMenuOpen(false);
+  // Botão principal de contato.
+  const botaoContato = document.getElementById("contact-button");
+
+  if (botaoContato) {
+    botaoContato.addEventListener("click", abrirWhatsApp);
+  }
+
+  // Botão flutuante do WhatsApp.
+  const botaoFlutuante = document.getElementById("floating-whatsapp");
+
+  if (botaoFlutuante) {
+    botaoFlutuante.addEventListener("click", abrirWhatsApp);
+  }
+}
+
+/* =====================================
+   ANO AUTOMÁTICO NO RODAPÉ
+===================================== */
+
+function configurarAno() {
+  const elementosAno = document.querySelectorAll("#current-year");
+
+  elementosAno.forEach(function (elemento) {
+    elemento.textContent = new Date().getFullYear();
   });
-
-  setMenuOpen(false);
 }
 
-/* WHATSAPP: TODOS OS BOTÕES */
+/* =====================================
+   INICIALIZAÇÃO
+===================================== */
 
-const numero = STUDIO_CONFIG.whatsapp.replace(/\D/g, "");
-const mensagem = encodeURIComponent(STUDIO_CONFIG.mensagem);
+document.addEventListener("DOMContentLoaded", function () {
+  configurarMenu();
+  configurarBotoesWhatsApp();
+  configurarAno();
 
-if (numero) {
-  window.open(
-    `https://wa.me/${numero}?text=${mensagem}`,
-    "_blank"
-  );
-}
-
-/* ANO AUTOMÁTICO */
-const year = document.getElementById("current-year");
-
-if (year) {
-  year.textContent = new Date().getFullYear();
-}
+  console.log("Studio Tech Trainner: script carregado.");
+});
+                             
