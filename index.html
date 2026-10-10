@@ -4,57 +4,37 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#090b12">
 
   <title>Studio Tech Trainner | Treinamento e Performance</title>
-
-  <meta
-    name="description"
-    content="Conheça o Studio Tech Trainner. Treinamento, dedicação e evolução em um ambiente preparado para você."
-  >
-
-  <meta name="theme-color" content="#08090d">
+  <meta name="description" content="Conheça o Studio Tech Trainner e descubra uma nova forma de trabalhar sua evolução física.">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
-    rel="stylesheet"
-  >
-
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-
-  <!-- CABEÇALHO -->
   <header class="header" id="inicio">
     <div class="container header-content">
 
-      <a href="#inicio" class="logo" aria-label="Studio Tech Trainner - início">
+      <a href="#inicio" class="brand" aria-label="Studio Tech Trainner">
         <img
           src="IMG-20261010-WA0148.jpg"
-          alt="Logo Studio Tech Trainner"
-          class="logo-img"
+          alt="Studio Tech Trainner"
+          class="brand-logo"
         >
-
-        <span class="logo-text">
+        <span class="brand-name">
           <strong>STUDIO TECH</strong>
           <small>TRAINNER</small>
         </span>
       </a>
 
-      <button
-        class="menu-toggle"
-        id="menu-toggle"
-        aria-label="Abrir menu"
-        aria-expanded="false"
-        aria-controls="nav-menu"
-        type="button"
-      >
-        <span></span>
-        <span></span>
-        <span></span>
+      <button class="menu-toggle" id="menu-toggle"
+        aria-label="Abrir menu" aria-expanded="false"
+        aria-controls="nav-menu" type="button">
+        <span></span><span></span><span></span>
       </button>
 
       <nav class="nav-menu" id="nav-menu">
@@ -62,122 +42,102 @@
         <a href="#sobre">O Studio</a>
         <a href="#treinamentos">Treinamentos</a>
         <a href="#diferenciais">Diferenciais</a>
-        <a href="#contato" class="nav-cta">Entre em contato</a>
+        <a href="#contato" class="nav-contact">Fale conosco <span>↗</span></a>
       </nav>
 
     </div>
   </header>
 
-
   <main>
-
-    <!-- DESTAQUE PRINCIPAL -->
     <section class="hero">
-      <div class="hero-overlay"></div>
-
+      <div class="hero-grid"></div>
       <div class="container hero-content">
-        <span class="section-tag">
-          <span class="tag-dot"></span>
+
+        <div class="eyebrow">
+          <span class="status-dot"></span>
           STUDIO TECH TRAINNER
-        </span>
+        </div>
 
         <h1>
-          Sua evolução<br>
-          começa com <span>atitude.</span>
+          Transforme sua<br>
+          rotina. Construa sua<br>
+          <span>melhor evolução.</span>
         </h1>
 
-        <p>
-          Treinamento, disciplina e dedicação para você buscar
-          seus objetivos e desenvolver todo o seu potencial.
+        <p class="hero-description">
+          Dedicação, disciplina e treinamento para você avançar
+          em direção aos seus objetivos, um passo de cada vez.
         </p>
 
-        <div class="hero-buttons">
-          <a href="#contato" class="btn btn-primary">
-            Quero conhecer
-            <span aria-hidden="true">↗</span>
+        <div class="hero-actions">
+          <a href="#contato" class="button button-primary">
+            Conhecer o studio <span>↗</span>
           </a>
-
-          <a href="#treinamentos" class="btn btn-outline">
-            Conheça o studio
+          <a href="#treinamentos" class="button button-secondary">
+            Explorar treinamentos
           </a>
         </div>
 
-        <div class="hero-bottom">
-          <span class="hero-line"></span>
-          <span>FOCO · DISCIPLINA · EVOLUÇÃO</span>
+        <div class="hero-caption">
+          <span class="caption-line"></span>
+          <span>FOCO NO PROCESSO. EVOLUÇÃO NO CAMINHO.</span>
         </div>
+
       </div>
 
-      <div class="hero-decoration hero-decoration-one"></div>
-      <div class="hero-decoration hero-decoration-two"></div>
+      <div class="hero-orb orb-blue"></div>
+      <div class="hero-orb orb-pink"></div>
     </section>
 
-
-    <!-- SOBRE O STUDIO -->
     <section class="about section" id="sobre">
-      <div class="container about-grid">
+      <div class="container about-layout">
 
-        <div class="about-image">
+        <div class="about-visual">
           <img
-            src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1000&q=85"
-            alt="Ambiente de treinamento físico"
+            src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1100&q=85"
+            alt="Ambiente de academia e treinamento"
             loading="lazy"
           >
-
-          <div class="image-label">
-            <span class="image-label-icon">✦</span>
+          <div class="visual-label">
+            <span class="label-symbol">✳</span>
             <div>
-              <strong>Seu próximo nível</strong>
-              <small>Começa aqui</small>
+              <strong>Seu próximo capítulo</strong>
+              <small>Começa com uma decisão.</small>
             </div>
           </div>
         </div>
 
-        <div class="about-content">
-          <span class="section-tag">SOBRE O STUDIO</span>
-
-          <h2>
-            Mais do que treinar.<br>
-            <span>Uma evolução constante.</span>
-          </h2>
+        <div class="about-copy">
+          <span class="section-label">01 / SOBRE O STUDIO</span>
+          <h2>Uma jornada que vai<br>além do <span>treinamento.</span></h2>
 
           <p>
-            O Studio Tech Trainner é um espaço para quem deseja
-            investir em si, desenvolver disciplina e trabalhar
-            em busca dos próprios objetivos.
+            Cada pessoa tem objetivos, desafios e um ritmo próprio.
+            Acreditamos que consistência e dedicação são fundamentais
+            para construir uma rotina mais ativa.
           </p>
 
           <p>
-            Cada jornada é única. Por isso, acreditamos na
-            importância da dedicação, da consistência e de uma
-            experiência de treinamento alinhada às suas metas.
+            No Studio Tech Trainner, você pode conhecer as opções
+            disponíveis e encontrar uma proposta de treinamento
+            alinhada às suas necessidades.
           </p>
 
-          <a href="#contato" class="text-link">
-            Conheça o nosso espaço <span aria-hidden="true">→</span>
+          <a href="#contato" class="inline-link">
+            Vamos conversar <span>→</span>
           </a>
         </div>
 
       </div>
     </section>
 
-
-    <!-- TREINAMENTOS -->
     <section class="services section" id="treinamentos">
       <div class="container">
 
         <div class="section-heading">
-          <span class="section-tag">NOSSO TRABALHO</span>
-
-          <h2>
-            Encontre seu ritmo.<br>
-            <span>Construa sua evolução.</span>
-          </h2>
-
-          <p>
-            Conheça algumas possibilidades para desenvolver sua
-            rotina de treinamento.
-          </p>
+          <span class="section-label">02 / TREINAMENTOS</span>
+          <h2>Seu objetivo.<br><span>Seu caminho de evolução.</span></h2>
+          <p>Conheça algumas possibilidades de trabalho físico.</p>
         </div>
 
         <div class="services-grid">
@@ -185,225 +145,144 @@
           <article class="service-card">
             <div class="service-image">
               <img
-                src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=800&q=85"
+                src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=850&q=85"
                 alt="Treinamento de força"
                 loading="lazy"
               >
-              <span class="service-number">01</span>
+              <span class="card-index">01</span>
             </div>
-
-            <div class="service-content">
-              <span class="service-category">DESEMPENHO</span>
+            <div class="service-body">
+              <span class="card-category">DESEMPENHO</span>
               <h3>Treinamento físico</h3>
-              <p>
-                Uma rotina de exercícios voltada ao desenvolvimento
-                físico e à busca por seus objetivos.
-              </p>
-              <a href="#contato" class="service-link">
-                Saiba mais <span aria-hidden="true">↗</span>
-              </a>
+              <p>Uma rotina de exercícios orientada aos seus objetivos e à sua evolução.</p>
+              <a href="#contato" class="card-link">Saiba mais <span>↗</span></a>
             </div>
           </article>
 
           <article class="service-card">
             <div class="service-image">
               <img
-                src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=800&q=85"
+                src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=850&q=85"
                 alt="Pessoa realizando exercícios"
                 loading="lazy"
               >
-              <span class="service-number">02</span>
+              <span class="card-index">02</span>
             </div>
-
-            <div class="service-content">
-              <span class="service-category">CONSISTÊNCIA</span>
-              <h3>Condicionamento</h3>
-              <p>
-                Trabalhe sua disposição e desenvolva hábitos que
-                contribuam para uma rotina mais ativa.
-              </p>
-              <a href="#contato" class="service-link">
-                Saiba mais <span aria-hidden="true">↗</span>
-              </a>
+            <div class="service-body">
+              <span class="card-category">CONDICIONAMENTO</span>
+              <h3>Rotina ativa</h3>
+              <p>Desenvolva hábitos consistentes e mantenha o movimento presente no seu dia.</p>
+              <a href="#contato" class="card-link">Saiba mais <span>↗</span></a>
             </div>
           </article>
 
           <article class="service-card">
             <div class="service-image">
               <img
-                src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=800&q=85"
-                alt="Pessoa praticando atividade física"
+                src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=850&q=85"
+                alt="Atividade física e movimento"
                 loading="lazy"
               >
-              <span class="service-number">03</span>
+              <span class="card-index">03</span>
             </div>
-
-            <div class="service-content">
-              <span class="service-category">BEM-ESTAR</span>
-              <h3>Rotina e evolução</h3>
-              <p>
-                Construa uma rotina de atividade física com foco
-                na regularidade e no seu desenvolvimento.
-              </p>
-              <a href="#contato" class="service-link">
-                Saiba mais <span aria-hidden="true">↗</span>
-              </a>
+            <div class="service-body">
+              <span class="card-category">BEM-ESTAR</span>
+              <h3>Desenvolvimento</h3>
+              <p>Respeite seu ritmo e avance com regularidade em sua jornada pessoal.</p>
+              <a href="#contato" class="card-link">Saiba mais <span>↗</span></a>
             </div>
           </article>
 
         </div>
 
-        <p class="services-note">
-          Consulte o studio para confirmar os treinamentos e
-          modalidades disponíveis.
+        <p class="disclaimer">
+          Consulte o studio para confirmar as modalidades e os serviços oferecidos.
         </p>
-
       </div>
     </section>
 
-
-    <!-- DIFERENCIAIS -->
     <section class="features section" id="diferenciais">
       <div class="container">
-
         <div class="section-heading">
-          <span class="section-tag">NOSSO DIFERENCIAL</span>
-
-          <h2>
-            Seu objetivo merece<br>
-            <span>dedicação de verdade.</span>
-          </h2>
-
-          <p>
-            A evolução acontece com constância, planejamento
-            e compromisso com cada etapa.
-          </p>
+          <span class="section-label">03 / NOSSA FILOSOFIA</span>
+          <h2>Pequenos passos.<br><span>Grandes possibilidades.</span></h2>
         </div>
 
         <div class="features-grid">
-
-          <article class="feature-item">
-            <div class="feature-icon" aria-hidden="true">✦</div>
-            <h3>Foco nos objetivos</h3>
-            <p>
-              Direcione sua rotina de treinamento para as metas
-              que fazem sentido para você.
-            </p>
+          <article class="feature-card">
+            <span class="feature-number">01</span>
+            <div class="feature-icon">↗</div>
+            <h3>Objetivos claros</h3>
+            <p>Defina onde deseja chegar e trabalhe com consistência para avançar.</p>
           </article>
 
-          <article class="feature-item">
-            <div class="feature-icon" aria-hidden="true">◈</div>
-            <h3>Compromisso</h3>
-            <p>
-              Valorize a regularidade e construa hábitos que
-              favoreçam sua evolução.
-            </p>
+          <article class="feature-card">
+            <span class="feature-number">02</span>
+            <div class="feature-icon">✳</div>
+            <h3>Disciplina diária</h3>
+            <p>Transforme a dedicação em parte da sua rotina, respeitando seus limites.</p>
           </article>
 
-          <article class="feature-item">
-            <div class="feature-icon" aria-hidden="true">↗</div>
-            <h3>Desenvolvimento</h3>
-            <p>
-              Respeite seu ritmo e avance de forma consistente
-              em sua jornada.
-            </p>
+          <article class="feature-card">
+            <span class="feature-number">03</span>
+            <div class="feature-icon">◈</div>
+            <h3>Evolução contínua</h3>
+            <p>Valorize o progresso construído ao longo do tempo, etapa por etapa.</p>
           </article>
-
         </div>
       </div>
     </section>
 
-
-    <!-- CHAMADA PARA CONTATO -->
     <section class="contact section" id="contato">
       <div class="container">
-
-        <div class="contact-box">
-          <div class="contact-decoration"></div>
-
+        <div class="contact-panel">
+          <div class="contact-glow"></div>
           <div class="contact-content">
-            <span class="section-tag">COMECE AGORA</span>
-
-            <h2>
-              Pronto para dar<br>
-              <span>o próximo passo?</span>
-            </h2>
-
+            <span class="section-label">04 / ENTRE EM CONTATO</span>
+            <h2>O próximo passo<br>pode começar <span>hoje.</span></h2>
             <p>
-              Entre em contato com o Studio Tech Trainner,
-              tire suas dúvidas e conheça as opções disponíveis.
+              Tire suas dúvidas e conheça as opções disponíveis
+              no Studio Tech Trainner.
             </p>
-
-            <a
-              href="#"
-              class="btn btn-primary"
-              id="contact-button"
-            >
-              Falar com o studio
-              <span aria-hidden="true">↗</span>
+            <a href="#" class="button button-primary" id="contact-button">
+              Falar com o studio <span>↗</span>
             </a>
-
-            <small class="contact-note">
-              Consulte horários, modalidades e condições diretamente com o studio.
-            </small>
           </div>
+          <div class="contact-mark">ST<span>.</span></div>
         </div>
-
       </div>
     </section>
-
   </main>
 
-
-  <!-- RODAPÉ -->
   <footer class="footer">
-    <div class="container footer-content">
-
-      <a href="#inicio" class="logo footer-logo">
+    <div class="container footer-main">
+      <a href="#inicio" class="brand footer-brand">
         <img
           src="IMG-20261010-WA0148.jpg"
           alt="Logo Studio Tech Trainner"
-          class="logo-img"
+          class="brand-logo"
           loading="lazy"
         >
-
-        <span class="logo-text">
+        <span class="brand-name">
           <strong>STUDIO TECH</strong>
           <small>TRAINNER</small>
         </span>
       </a>
 
-      <p>
-        Treinamento, dedicação e evolução.
-      </p>
-
-      <a href="#inicio" class="back-to-top">
-        Voltar ao topo ↑
-      </a>
-
+      <p>FOCO · DISCIPLINA · EVOLUÇÃO</p>
+      <a href="#inicio" class="footer-top">Voltar ao início ↑</a>
     </div>
 
     <div class="container footer-bottom">
-      <span>
-        © <span id="current-year"></span> Studio Tech Trainner.
-        Todos os direitos reservados.
-      </span>
-
-      <span class="footer-credit">
-        Desenvolvido com dedicação.
-      </span>
+      <span>© <span id="current-year"></span> Studio Tech Trainner.</span>
+      <span>Todos os direitos reservados.</span>
     </div>
   </footer>
 
-
   <script src="script.js"></script>
-
   <script>
-    // Atualiza automaticamente o ano do rodapé.
     document.getElementById("current-year").textContent =
       new Date().getFullYear();
   </script>
-
 </body>
-              </html>
-              
+</html>
