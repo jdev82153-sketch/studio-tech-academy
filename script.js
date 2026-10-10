@@ -1,125 +1,74 @@
 
 "use strict";
 
-/* =====================================
-   STUDIO TECH TRAINNER
-   Configuração do WhatsApp
-===================================== */
-
 const STUDIO_CONFIG = {
   whatsapp: "5511982190060",
   mensagem:
     "Olá! Conheci o Studio Tech Trainner pelo site e gostaria de conhecer os treinamentos, valores e horários disponíveis."
 };
 
-/* =====================================
-   FUNÇÕES DO WHATSAPP
-===================================== */
-
 function abrirWhatsApp(event) {
-  if (event) {
-    event.preventDefault();
-  }
+  event.preventDefault();
 
-  const numero = String(STUDIO_CONFIG.whatsapp || "")
-    .replace(/\D/g, "");
+  const numero = STUDIO_CONFIG.whatsapp.replace(/\D/g, "");
+  const texto = encodeURIComponent(STUDIO_CONFIG.mensagem);
 
-  const mensagem = encodeURIComponent(
-    STUDIO_CONFIG.mensagem
-  );
+  if (!numero) return;
 
-  if (!numero) {
-    console.error("Configure o número do WhatsApp em STUDIO_CONFIG.");
-    return;
-  }
-
-  const url = `https://wa.me/${numero}?text=${mensagem}`;
-
-  window.open(url, "_blank", "noopener,noreferrer");
+  window.location.href = `https://wa.me/${numero}?text=${texto}`;
 }
 
-/* =====================================
-   MENU MOBILE
-===================================== */
-
-function configurarMenu() {
+function iniciarSite() {
+  // MENU MOBILE
   const menuBotao = document.getElementById("menu-toggle");
   const menu = document.getElementById("nav-menu");
 
-  if (!menuBotao || !menu) {
-    return;
+  if (menuBotao && menu) {
+    menuBotao.onclick = function (event) {
+      event.preventDefault();
+      event.stopPropagation();
+
+      const aberto = menu.classList.toggle("active");
+      menuBotao.setAttribute("aria-expanded", String(aberto));
+    };
+
+    menu.querySelectorAll("a").forEach(function (link) {
+      link.addEventListener("click", function () {
+        menu.classList.remove("active");
+        menuBotao.setAttribute("aria-expanded", "false");
+      });
+    });
   }
 
-  menuBotao.addEventListener("click", function () {
-    const aberto = menu.classList.toggle("active");
-
-    menuBotao.setAttribute("aria-expanded", String(aberto));
-  });
-
-  menu.querySelectorAll("a").forEach(function (link) {
-    link.addEventListener("click", function () {
-      menu.classList.remove("active");
-      menuBotao.setAttribute("aria-expanded", "false");
-    });
-  });
-
-  document.addEventListener("click", function (event) {
-    if (
-      !menu.contains(event.target) &&
-      !menuBotao.contains(event.target)
-    ) {
-      menu.classList.remove("active");
-      menuBotao.setAttribute("aria-expanded", "false");
-    }
-  });
-}
-
-/* =====================================
-   BOTÕES DE CONTATO
-===================================== */
-
-function configurarBotoesWhatsApp() {
-  // Todos os links com essa classe abrem o WhatsApp.
+  // TODOS OS LINKS DE WHATSAPP
   document.querySelectorAll(".whatsapp-link").forEach(function (botao) {
     botao.addEventListener("click", abrirWhatsApp);
   });
 
-  // Botão principal de contato.
-  const botaoContato = document.getElementById("contact-button");
+  // BOTÃO PRINCIPAL DE CONTATO
+  const contato = document.getElementById("contact-button");
 
-  if (botaoContato) {
-    botaoContato.addEventListener("click", abrirWhatsApp);
+  if (contato) {
+    contato.addEventListener("click", abrirWhatsApp);
   }
 
-  // Botão flutuante do WhatsApp.
-  const botaoFlutuante = document.getElementById("floating-whatsapp");
+  // BOTÃO FLUTUANTE
+  const flutuante = document.getElementById("floating-whatsapp");
 
-  if (botaoFlutuante) {
-    botaoFlutuante.addEventListener("click", abrirWhatsApp);
+  if (flutuante) {
+    flutuante.addEventListener("click", abrirWhatsApp);
   }
-}
 
-/* =====================================
-   ANO AUTOMÁTICO NO RODAPÉ
-===================================== */
-
-function configurarAno() {
-  const elementosAno = document.querySelectorAll("#current-year");
-
-  elementosAno.forEach(function (elemento) {
+  // ANO DO RODAPÉ
+  document.querySelectorAll("#current-year").forEach(function (elemento) {
     elemento.textContent = new Date().getFullYear();
   });
+
+  console.log("Studio Tech Trainner carregado.");
 }
 
-/* =====================================
-   INICIALIZAÇÃO
-===================================== */
-
-document.addEventListener("DOMContentLoaded", function () {
-  configurarMenu();
-  configurarBotoesWhatsApp();
-  configurarAno();
-
-  console.log("Studio Tech Trainner: script carregado.");
-});
-                             
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", iniciarSite);
+} else {
+  iniciarSite();
+}
