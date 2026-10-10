@@ -1,155 +1,121 @@
 
-/*
-  STUDIO TECH TRAINNER
+/* ========================================
+   STUDIO TECH TRAINNER
+   Menu responsivo e contato via WhatsApp
+======================================== */
 
-  Configure o WhatsApp abaixo:
-  Use código do país + DDD + número, somente dígitos.
-  Exemplo de formato: 5511999999999
-
-  Deixe vazio enquanto não tiver o número confirmado.
-*/
-
+/* CONFIGURAÇÃO DO WHATSAPP */
 const STUDIO_CONFIG = {
-  whatsapp: "",
-  mensagem: "Olá! Conheci o Studio Tech Trainner pelo site e gostaria de saber mais sobre os treinamentos."
+  whatsapp: "", // Coloque o número com DDI e DDD, somente números.
+  mensagem:
+    "Olá! Conheci o Studio Tech Trainner pelo site e gostaria de saber mais sobre os treinamentos."
 };
 
-document.addEventListener("DOMContentLoaded", () => {
-  document.documentElement.classList.add("js-ready");
+/* ELEMENTOS */
+const menuToggle = document.getElementById("menu-toggle");
+const navMenu = document.getElementById("nav-menu");
+const contactButton = document.getElementById("contact-button");
 
-  // MENU MOBILE
-  const menuToggle = document.getElementById("menu-toggle");
-  const navMenu = document.getElementById("nav-menu");
-  const menuLinks = document.querySelectorAll("#nav-menu a");
+/* ========================================
+   MENU PARA CELULAR
+======================================== */
 
-  function closeMenu() {
-    if (!menuToggle || !navMenu) return;
+function closeMenu() {
+  if (!menuToggle || !navMenu) return;
 
-    menuToggle.classList.remove("active");
-    navMenu.classList.remove("open");
-    document.body.classList.remove("menu-open");
+  navMenu.classList.remove("active");
+  menuToggle.classList.remove("active");
+  menuToggle.setAttribute("aria-expanded", "false");
+  menuToggle.setAttribute("aria-label", "Abrir menu");
+}
 
-    menuToggle.setAttribute("aria-expanded", "false");
-    menuToggle.setAttribute("aria-label", "Abrir menu");
-  }
+function openMenu() {
+  if (!menuToggle || !navMenu) return;
 
-  if (menuToggle && navMenu) {
-    menuToggle.addEventListener("click", () => {
-      const isOpen = navMenu.classList.toggle("open");
+  navMenu.classList.add("active");
+  menuToggle.classList.add("active");
+  menuToggle.setAttribute("aria-expanded", "true");
+  menuToggle.setAttribute("aria-label", "Fechar menu");
+}
 
-      menuToggle.classList.toggle("active", isOpen);
-      document.body.classList.toggle("menu-open", isOpen);
+if (menuToggle && navMenu) {
+  menuToggle.addEventListener("click", () => {
+    const isOpen = navMenu.classList.contains("active");
 
-      menuToggle.setAttribute("aria-expanded", String(isOpen));
-      menuToggle.setAttribute(
-        "aria-label",
-        isOpen ? "Fechar menu" : "Abrir menu"
-      );
-    });
-
-    menuLinks.forEach(link => {
-      link.addEventListener("click", closeMenu);
-    });
-
-    document.addEventListener("keydown", event => {
-      if (event.key === "Escape") closeMenu();
-    });
-
-    window.addEventListener("resize", () => {
-      if (window.innerWidth > 760) closeMenu();
-    });
-  }
-
-  // ANIMAÇÕES AO ROLAR A PÁGINA
-  const revealElements = document.querySelectorAll(".reveal");
-
-  if ("IntersectionObserver" in window) {
-    const observer = new IntersectionObserver(
-      entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      {
-        threshold: 0.12,
-        rootMargin: "0px 0px -30px 0px"
-      }
-    );
-
-    revealElements.forEach(element => observer.observe(element));
-  } else {
-    revealElements.forEach(element => element.classList.add("visible"));
-  }
-
-  // WHATSAPP
-  const whatsappLinks = document.querySelectorAll(".whatsapp-link");
-
-  whatsappLinks.forEach(link => {
-    link.addEventListener("click", event => {
-      const number = String(STUDIO_CONFIG.whatsapp || "").replace(/\D/g, "");
-
-      if (!number) {
-        event.preventDefault();
-        alert(
-          "O WhatsApp do Studio ainda precisa ser configurado no arquivo script.js."
-        );
-        return;
-      }
-
-      if (number.length < 12 || number.length > 13) {
-        event.preventDefault();
-        alert(
-          "Confira o número do WhatsApp no arquivo script.js. Inclua o código do Brasil, o DDD e o telefone."
-        );
-        return;
-      }
-
-      const message = encodeURIComponent(STUDIO_CONFIG.mensagem);
-      const url = `https://wa.me/${number}?text=${message}`;
-
-      event.preventDefault();
-      window.open(url, "_blank", "noopener,noreferrer");
-    });
+    if (isOpen) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
   });
 
-  // ANO AUTOMÁTICO NO RODAPÉ
-  const yearElement = document.getElementById("current-year");
+  // Fecha o menu ao selecionar uma seção.
+  navMenu.querySelectorAll('a[href^="#"]').forEach((link) => {
+    link.addEventListener("click", closeMenu);
+  });
 
-  if (yearElement) {
-    yearElement.textContent = new Date().getFullYear();
-  }
+  // Fecha o menu com a tecla Escape.
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      closeMenu();
+    }
+  });
 
-  // DESTAQUE DOS LINKS DE NAVEGAÇÃO
-  const sections = document.querySelectorAll("main section[id]");
+  // Evita manter o menu mobile aberto ao ampliar a tela.
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 700) {
+      closeMenu();
+    }
+  });
 
-  if ("IntersectionObserver" in window) {
-    const sectionObserver = new IntersectionObserver(
-      entries => {
-        entries.forEach(entry => {
-          if (!entry.isIntersecting) return;
+  // Fecha ao clicar fora do menu.
+  document.addEventListener("click", (event) => {
+    const clickedInsideMenu = navMenu.contains(event.target);
+    const clickedToggle = menuToggle.contains(event.target);
 
-          const id = entry.target.id;
+    if (!clickedInsideMenu && !clickedToggle) {
+      closeMenu();
+    }
+  });
+}
 
-          document.querySelectorAll(".nav-menu > a").forEach(link => {
-            if (link.getAttribute("href") === `#${id}`) {
-              link.setAttribute("aria-current", "location");
-            } else {
-              link.removeAttribute("aria-current");
-            }
-          });
-        });
-      },
-      {
-        rootMargin: "-30% 0px -60% 0px"
-      }
-    );
+/* ========================================
+   BOTÃO DE CONTATO
+======================================== */
 
-    sections.forEach(section => sectionObserver.observe(section));
-  }
+if (contactButton) {
+  contactButton.addEventListener("click", (event) => {
+    event.preventDefault();
 
-  console.log("Studio Tech Trainner: página carregada.");
-});
-    
+    const phone = STUDIO_CONFIG.whatsapp.replace(/\D/g, "");
+
+    if (!phone) {
+      alert(
+        "O WhatsApp do studio ainda não foi configurado. " +
+        "Adicione o número no arquivo script.js."
+      );
+      return;
+    }
+
+    const message = encodeURIComponent(STUDIO_CONFIG.mensagem);
+    const whatsappUrl = `https://wa.me/${phone}?text=${message}`;
+
+    window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+  });
+}
+
+/* ========================================
+   ANO AUTOMÁTICO NO RODAPÉ
+======================================== */
+
+const currentYear = document.getElementById("current-year");
+
+if (currentYear) {
+  currentYear.textContent = new Date().getFullYear();
+}
+
+/* ========================================
+   FECHAMENTO INICIAL DO MENU
+======================================== */
+
+closeMenu();
