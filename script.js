@@ -64,29 +64,12 @@ if (menuToggle && navMenu) {
 const numero = STUDIO_CONFIG.whatsapp.replace(/\D/g, "");
 const mensagem = encodeURIComponent(STUDIO_CONFIG.mensagem);
 
-window.open(
-  `https://wa.me/${numero}?text=${mensagem}`,
-  "_blank"
-);
-
-
-  const url =
-    "https://wa.me/" +
-    phone +
-    "?text=" +
-    encodeURIComponent(STUDIO_CONFIG.mensagem);
-
-  window.open(url, "_blank", "noopener,noreferrer");
+if (numero) {
+  window.open(
+    `https://wa.me/${numero}?text=${mensagem}`,
+    "_blank"
+  );
 }
-
-document.querySelectorAll(
-  ".whatsapp-link, #contact-button, #floating-whatsapp"
-).forEach((button) => {
-  button.addEventListener("click", (event) => {
-    event.preventDefault();
-    openStudioWhatsApp();
-  });
-});
 
 /* ANO AUTOMÁTICO */
 const year = document.getElementById("current-year");
