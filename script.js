@@ -60,16 +60,15 @@ if (menuToggle && navMenu) {
 }
 
 /* WHATSAPP: TODOS OS BOTÕES */
-function openStudioWhatsApp() {
-  const phone = STUDIO_CONFIG.whatsapp.replace(/\D/g, "");
 
-  if (!phone) {
-    alert(
-      "O WhatsApp ainda não foi configurado. " +
-      "Adicione o número do studio no arquivo script.js."
-    );
-    return;
-  }
+const numero = STUDIO_CONFIG.whatsapp.replace(/\D/g, "");
+const mensagem = encodeURIComponent(STUDIO_CONFIG.mensagem);
+
+window.open(
+  `https://wa.me/${numero}?text=${mensagem}`,
+  "_blank"
+);
+
 
   const url =
     "https://wa.me/" +
