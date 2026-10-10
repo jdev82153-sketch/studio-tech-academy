@@ -1,36 +1,39 @@
 
 "use strict";
 
-const STUDIO_CONFIG = {
-  whatsapp: "5511982190060",
-  mensagem:
-    "Olá! Conheci o Studio Tech Trainner pelo site e gostaria de conhecer os treinamentos, valores e horários disponíveis."
-};
+const WHATSAPP_NUMERO = "5511982190060";
+const WHATSAPP_MENSAGEM =
+  "Olá! Conheci o Studio Tech Trainner pelo site e gostaria de conhecer os treinamentos, valores e horários disponíveis.";
 
 function abrirWhatsApp(event) {
-  event.preventDefault();
+  if (event) {
+    event.preventDefault();
+    event.stopPropagation();
+  }
 
-  const numero = STUDIO_CONFIG.whatsapp.replace(/\D/g, "");
-  const texto = encodeURIComponent(STUDIO_CONFIG.mensagem);
+  const mensagem = encodeURIComponent(WHATSAPP_MENSAGEM);
+  const link = "https://wa.me/" + WHATSAPP_NUMERO + "?text=" + mensagem;
 
-  if (!numero) return;
-
-  window.location.href = `https://wa.me/${numero}?text=${texto}`;
+  window.location.assign(link);
 }
 
-function iniciarSite() {
-  // MENU MOBILE
+document.addEventListener("DOMContentLoaded", function () {
+  // Menu de três barrinhas
   const menuBotao = document.getElementById("menu-toggle");
   const menu = document.getElementById("nav-menu");
 
   if (menuBotao && menu) {
-    menuBotao.onclick = function (event) {
+    menuBotao.addEventListener("click", function (event) {
       event.preventDefault();
       event.stopPropagation();
 
-      const aberto = menu.classList.toggle("active");
-      menuBotao.setAttribute("aria-expanded", String(aberto));
-    };
+      menu.classList.toggle("active");
+
+      menuBotao.setAttribute(
+        "aria-expanded",
+        menu.classList.contains("active") ? "true" : "false"
+      );
+    });
 
     menu.querySelectorAll("a").forEach(function (link) {
       link.addEventListener("click", function () {
@@ -40,35 +43,15 @@ function iniciarSite() {
     });
   }
 
-  // TODOS OS LINKS DE WHATSAPP
-  document.querySelectorAll(".whatsapp-link").forEach(function (botao) {
+  // Botões e links de WhatsApp
+  document.querySelectorAll(
+    ".whatsapp-link, #contact-button, #floating-whatsapp"
+  ).forEach(function (botao) {
     botao.addEventListener("click", abrirWhatsApp);
   });
 
-  // BOTÃO PRINCIPAL DE CONTATO
-  const contato = document.getElementById("contact-button");
-
-  if (contato) {
-    contato.addEventListener("click", abrirWhatsApp);
-  }
-
-  // BOTÃO FLUTUANTE
-  const flutuante = document.getElementById("floating-whatsapp");
-
-  if (flutuante) {
-    flutuante.addEventListener("click", abrirWhatsApp);
-  }
-
-  // ANO DO RODAPÉ
+  // Ano do rodapé
   document.querySelectorAll("#current-year").forEach(function (elemento) {
     elemento.textContent = new Date().getFullYear();
   });
-
-  console.log("Studio Tech Trainner carregado.");
-}
-
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", iniciarSite);
-} else {
-  iniciarSite();
-}
+});
